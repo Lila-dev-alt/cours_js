@@ -5,7 +5,6 @@ let uppercase = document.getElementById('uppercase');
 let button = document.getElementById('button');
 
 let password = document.getElementById('password');
-let form = document.getElementById('form');
 let error = document.getElementById('span-error');
 const letters = 'abcdefghijklmnopqrstuvwxyz';
 const UppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -61,10 +60,7 @@ button.addEventListener("click", function(event) {
 
 
     } else {
-        let newdiv = document.createElement("div");
-        form.append(newdiv);
         for (let i = 0; i < lengthPassword.value; i++) {
-
             randomLetter = getLetter();
             result.push(randomLetter);
 
@@ -87,7 +83,7 @@ button.addEventListener("click", function(event) {
         }
 
 
-        newdiv.textContent = string;
+        password.value = string;
 
     }
 
