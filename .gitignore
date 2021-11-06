@@ -2,3 +2,6 @@ node_modules
 bundle.js
 projects/**/node_modules
 projects/**/package*
+.DS_Store
+/.DS_Store/
+projects/.DS_Store

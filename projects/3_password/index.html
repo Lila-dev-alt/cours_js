@@ -1,22 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+
+<head>
     <meta charset="utf-8" />
 
     <meta description="Projet Autocomplete" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link
-      rel="stylesheet"
-      href="https://necolas.github.io/normalize.css/latest/normalize.css"
-    />
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
     <link rel="stylesheet" href="../../styles/reset.css" />
     <link rel="stylesheet" href="./style.css" />
 
     <script type="module" src="./index.js" defer></script>
 
     <title>Autocomplete</title>
-  </head>
+</head>
 
-  <body></body>
+<body>
+    <div class="container">
+
+
+        <form>
+            <div class="input">
+                <label for="length-password">Nombres de charactères</label>
+                <input type="number" id="length-password" name="length-password">
+            </div>
+
+            <div class="input">
+                <label for="numbers">Chiffres ? </label>
+                <input type="checkbox" id="numbers" name="numbers">
+            </div>
+
+            <div class="input">
+                <label for="specials">Charactères spéciaux  ? </label>
+                <input type="checkbox" id="specials" name="specials">
+            </div>
+
+            <div class="input">
+                <label for="uppercase">Majuscules ? </label>
+                <input type="checkbox" id="uppercase" name="uppercase">
+            </div>
+
+            <button id="button"> Genérer</button>
+            <div class="input">
+                <input type="text" id="password" placeholder="Mot de passe">
+            </div>
+        </form>
+    </div>
+
+
+
+</body>
+
 </html>
