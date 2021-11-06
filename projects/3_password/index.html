@@ -20,10 +20,13 @@
     <div class="container">
 
 
-        <form>
+        <form id="form">
+            <div id="span-error">
+
+            </div>
             <div class="input">
                 <label for="length-password">Nombres de charactères</label>
-                <input type="number" id="length-password" name="length-password">
+                <input type="number" id="length-password" name="length-password" min="8">
             </div>
 
             <div class="input">
@@ -41,10 +44,8 @@
                 <input type="checkbox" id="uppercase" name="uppercase">
             </div>
 
-            <button id="button"> Genérer</button>
-            <div class="input">
-                <input type="text" id="password" placeholder="Mot de passe">
-            </div>
+            <button id="button" type="submit"> Genérer</button>
+
         </form>
     </div>
 

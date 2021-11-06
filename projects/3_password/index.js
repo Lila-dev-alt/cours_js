@@ -5,6 +5,8 @@ let uppercase = document.getElementById('uppercase');
 let button = document.getElementById('button');
 
 let password = document.getElementById('password');
+let form = document.getElementById('form');
+let error = document.getElementById('span-error');
 const letters = 'abcdefghijklmnopqrstuvwxyz';
 const UppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -44,6 +46,7 @@ function randomSpecialChar() {
 
 
 button.addEventListener("click", function(event) {
+
     event.preventDefault();
     let string = '';
     let randomLetter = '';
@@ -51,31 +54,42 @@ button.addEventListener("click", function(event) {
     let randomspecials = '';
     let randomUpper = '';
     let result = [];
+    if (lengthPassword.value < 8) {
+        event.preventDefault();
+        error.innerHTML = 'Le mot de passe doit faire au moins 8 charactères';
+        error.style.color = 'red';
 
-    for (let i = 0; i < lengthPassword.value; i++) {
 
-        randomLetter = getLetter();
-        result.push(randomLetter);
+    } else {
+        let newdiv = document.createElement("div");
+        form.append(newdiv);
+        for (let i = 0; i < lengthPassword.value; i++) {
 
-        if (numbers.checked) {
-            randomNumber = getNumber(9);
-            result.push(randomNumber);
+            randomLetter = getLetter();
+            result.push(randomLetter);
+
+            if (numbers.checked) {
+                randomNumber = getNumber(9);
+                result.push(randomNumber);
+            }
+            if (specials.checked) {
+                randomspecials = randomSpecialChar();
+                result.push(randomspecials);
+            }
+            if (uppercase.checked) {
+                randomUpper = getUppercaseLetter();
+                result.push(randomUpper);
+            }
+
+
+            let valueToUse = result[Math.floor(Math.random() * result.length)];
+            string = string + valueToUse;
         }
-        if (specials.checked) {
-            randomspecials = randomSpecialChar();
-            result.push(randomspecials);
-        }
-        if (uppercase.checked) {
-            randomUpper = getUppercaseLetter();
-            result.push(randomUpper);
-        }
 
 
-        let valueToUse = result[Math.floor(Math.random() * result.length)];
-        string = string + valueToUse;
+        newdiv.textContent = string;
+
     }
-
-    return password.value = string;
 
 
 
