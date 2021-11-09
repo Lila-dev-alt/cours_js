@@ -20,7 +20,7 @@ let x = setInterval(function() {
     if (time < 0) {
         const div = document.createElement('div');
         document.body.append(div);
-        div.textContent = "Merry Christmas 🎅";
+        div.textContent = "🎄 Merry Christmas 🎅";
         div.classList.add("message");
         div.style.opacity = "1";
         digitDays.textContent = 0;
