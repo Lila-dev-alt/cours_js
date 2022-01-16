@@ -22,7 +22,7 @@ function createForm() {
 
 function createDiv() {
     let div = document.createElement("div");
-    div.classList.add('result');
+    div.id = 'result';
     return div;
 }
 
@@ -91,29 +91,28 @@ function createOl(adresses) {
 document.addEventListener(
     'DOMContentLoaded',
     function() {
-
-
         const url = 'https://api-adresse.data.gouv.fr/search/';
         const autocomplete = '&autocomplete=1';
         input.addEventListener("input", async function(event) {
+            let res = document.getElementById('result');
+           
             let nameValue = useValue();
             let encodeInput = `?q=${encodeURIComponent(nameValue)}`;
             let final = url + encodeInput + autocomplete;
-            if (nameValue !== ' ') {
+            if (nameValue == ' ') {
+                return;
+            }
                 let apiData = await getJson(final);
 
                 let apiDataFeatures = apiData.features;
                 let datas = apiDataFeatures.map(function(data) {
-                    let displayLi = createLi(data.properties.label);
+                    let displayLi = data.properties.label;
                     return displayLi;
                 });
 
+                res.innerHTML = '';
                 let ol = createOl(datas);
-
-                div.append(ol);
-                console.log(ol);
-            }
-
+                res.append(ol);
         });
 
 
