@@ -1,10 +1,10 @@
 function getJson(url) {
     return fetch(url)
-        .then(function(resp) {
+        .then(function (resp) {
             return resp.json();
 
         })
-        .catch(function(err) {
+        .catch(function (err) {
             console.error(err);
         });
 }
@@ -81,6 +81,7 @@ function createOl(adresses) {
 
     adresses.forEach(adress => {
         const li = createLi(adress);
+        li.classList.add('li-class');
         ol.append(li);
     });
 
@@ -90,29 +91,43 @@ function createOl(adresses) {
 
 document.addEventListener(
     'DOMContentLoaded',
-    function() {
+    function () {
         const url = 'https://api-adresse.data.gouv.fr/search/';
         const autocomplete = '&autocomplete=1';
-        input.addEventListener("input", async function(event) {
+        input.addEventListener("input", async function (event) {
             let res = document.getElementById('result');
-           
+
             let nameValue = useValue();
             let encodeInput = `?q=${encodeURIComponent(nameValue)}`;
             let final = url + encodeInput + autocomplete;
             if (nameValue == ' ') {
                 return;
             }
-                let apiData = await getJson(final);
+            let apiData = await getJson(final);
 
-                let apiDataFeatures = apiData.features;
-                let datas = apiDataFeatures.map(function(data) {
-                    let displayLi = data.properties.label;
-                    return displayLi;
-                });
+            let apiDataFeatures = apiData.features;
+            let datas = apiDataFeatures.map(function (data) {
+                let displayLi = data.properties.label;
+                return displayLi;
+            });
 
-                res.innerHTML = '';
-                let ol = createOl(datas);
-                res.append(ol);
+            res.innerHTML = '';
+            let ol = createOl(datas);
+            res.append(ol);
+
+            let li = document.getElementsByClassName('li-class');
+            if (li) {
+                for (var i = 0; i < li.length; i++) {
+                    li[i].addEventListener("click", function (event) {
+                        console.log(event.target.innerHTML);
+                        console.log(nameValue);
+                        nameValue = event.target.textContent;
+                        input.value = nameValue;
+                    });
+                }
+            }
+
+
         });
 
 
@@ -120,4 +135,6 @@ document.addEventListener(
 
     }, { once: true });
 
-//afficher la liste en dessou de l'input
+
+// quand on clique sur un li ca ajoute a l input
+//submit plus un todo remettre a 0 la value 
