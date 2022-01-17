@@ -25,6 +25,11 @@ function createDiv() {
     div.id = 'result';
     return div;
 }
+function createTodoDiv() {
+    let div = document.createElement("div");
+    div.id = 'todo';
+    return div;
+}
 
 function createButton() {
     let button = document.createElement("button");
@@ -38,6 +43,7 @@ function appendFormAndButton() {
     let form = createForm();
     let button = createButton();
     document.body.append(form);
+    button.id = 'button';
     form.append(button);
     return form;
 }
@@ -51,12 +57,23 @@ function appendInput(form) {
 function appendDiv() {
     let div = createDiv();
     form.append(div);
+    return div;
+}
+function appendTODODiv() {
+    let div = createTodoDiv();
+    document.body.append(div);
+    return div;
 }
 let form = appendFormAndButton();
 //appendInput();
 
 let input = appendInput(form);
 const div = appendDiv();
+let todo = appendTODODiv();
+// transform in function
+let p = document.createElement("p");
+todo.append(p);
+p.textContent = 'TODOS :';
 
 
 
@@ -114,19 +131,24 @@ document.addEventListener(
             res.innerHTML = '';
             let ol = createOl(datas);
             res.append(ol);
+            // make it a function 
 
             let li = document.getElementsByClassName('li-class');
             if (li) {
                 for (var i = 0; i < li.length; i++) {
                     li[i].addEventListener("click", function (event) {
                         console.log(event.target.innerHTML);
-                        console.log(nameValue);
                         nameValue = event.target.textContent;
                         input.value = nameValue;
                     });
                 }
             }
 
+            // submit button creer le todo
+            const button = document.getElementById('button');
+            button.addEventListener("click", function (event) {
+
+            });
 
         });
 
@@ -134,6 +156,9 @@ document.addEventListener(
 
 
     }, { once: true });
+
+
+
 
 
 // quand on clique sur un li ca ajoute a l input

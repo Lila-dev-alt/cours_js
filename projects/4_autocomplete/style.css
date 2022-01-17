@@ -23,3 +23,7 @@ form {
 #result ul li:hover {
     background: #eee;
 }
+
+#todo{
+    margin-left: 50%;
+}
