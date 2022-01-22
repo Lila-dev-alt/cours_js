@@ -74,6 +74,8 @@ let todo = appendTODODiv();
 let p = document.createElement("p");
 todo.append(p);
 p.textContent = 'TODOS :';
+let olTD = document.createElement("ol");
+todo.append(olTD);
 
 
 
@@ -93,6 +95,9 @@ function createLi(adress) {
     return li;
 }
 
+
+
+
 function createOl(adresses) {
     const ol = document.createElement('ol');
 
@@ -105,7 +110,7 @@ function createOl(adresses) {
     return ol;
 }
 
-
+const litest = document.createElement("li");
 document.addEventListener(
     'DOMContentLoaded',
     function () {
@@ -143,19 +148,31 @@ document.addEventListener(
                     });
                 }
             }
-
+            //   nameValue = input.value;
             // submit button creer le todo
+
             const button = document.getElementById('button');
             button.addEventListener("click", function (event) {
+
+                event.preventDefault();
+
+                olTD.append(litest);
+                nameValue = input.value;
+                //   console.log(nameValue);
+                litest.textContent = nameValue;
 
             });
 
         });
 
 
+    }, { once: true }
+    // n'ajoute pas un todo mais remplace 
 
 
-    }, { once: true });
+
+);
+
 
 
 
@@ -163,3 +180,5 @@ document.addEventListener(
 
 // quand on clique sur un li ca ajoute a l input
 //submit plus un todo remettre a 0 la value 
+// quand ca marche par defaut une ligne rouge et tu cliques ligne verte
+// on peut les trier ensuite par tous et todo , voir enonce 
