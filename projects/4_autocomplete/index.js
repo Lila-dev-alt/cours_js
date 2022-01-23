@@ -203,8 +203,6 @@ document.addEventListener(
                     });
                 }
             }
-            //   nameValue = input.value;
-            // submit button creer le todo
 
         });
 
@@ -231,10 +229,3 @@ document.addEventListener(
 
 
 
-
-
-
-
-
-// quand ca marche par defaut une ligne rouge et tu cliques ligne verte
-// on peut les trier ensuite par tous et todo , voir enonce 
