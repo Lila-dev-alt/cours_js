@@ -27,3 +27,21 @@ form {
 #todo{
     margin-left: 50%;
 }
+
+.incomplete {
+    background-color: red;
+}
+
+.complete {
+    background-color: green;
+}
+
+#todo li {
+    margin-top: 5px;
+    width: 50%;
+}
+
+span.span-delete{
+    float: right;
+    border: 2px solid black;
+}

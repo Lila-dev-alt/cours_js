@@ -64,6 +64,9 @@ function appendTODODiv() {
     document.body.append(div);
     return div;
 }
+
+let contentToDo = [];
+
 let form = appendFormAndButton();
 //appendInput();
 
@@ -75,6 +78,7 @@ let p = document.createElement("p");
 todo.append(p);
 p.textContent = 'TODOS :';
 let olTD = document.createElement("ol");
+olTD.classList.add('content');
 todo.append(olTD);
 
 
@@ -110,7 +114,59 @@ function createOl(adresses) {
     return ol;
 }
 
-const litest = document.createElement("li");
+function renderToDoList(contentToDo) {
+    olTD.innerHTML = "";
+
+    contentToDo.forEach(function (element, index) {
+        let liTodo = document.createElement("li");
+        let span = document.createElement('span');
+        span.classList.add('span-adress');
+        let span2 = document.createElement('span');
+        span2.classList.add('span-delete');
+        span2.textContent = 'Supprimer';
+        span.textContent = element[0];
+        liTodo.dataset.id = index;
+        if (element[1] === 0) {
+            liTodo.classList.add('incomplete');
+        } else {
+            liTodo.classList.add('complete');
+        }
+
+        olTD.append(liTodo);
+        liTodo.append(span);
+        liTodo.append(span2);
+    })
+    changeStateTodo();
+    deleteTodo();
+}
+function changeStateTodo() {
+    let olTodo = document.querySelectorAll('ol.content > li > span.span-adress');
+    olTodo.forEach(function (element) {
+        element.addEventListener("click", function (event) {
+            let currentElement = event.target.parentNode;
+            if (contentToDo[currentElement.dataset.id][1] === 0) {
+                contentToDo[currentElement.dataset.id][1] = 1;
+            } else {
+                contentToDo[currentElement.dataset.id][1] = 0;
+            }
+            renderToDoList(contentToDo);
+        })
+    })
+
+}
+
+function deleteTodo() {
+    let spanDelete = document.querySelectorAll('ol.content > li > span.span-delete');
+    spanDelete.forEach(function (element, index) {
+        element.addEventListener("click", function (event) {
+            let currentElement = event.target.parentNode;
+            contentToDo.splice(currentElement.dataset.id, 1);
+            renderToDoList(contentToDo);
+        })
+
+    })
+}
+
 document.addEventListener(
     'DOMContentLoaded',
     function () {
@@ -142,7 +198,6 @@ document.addEventListener(
             if (li) {
                 for (var i = 0; i < li.length; i++) {
                     li[i].addEventListener("click", function (event) {
-                        console.log(event.target.innerHTML);
                         nameValue = event.target.textContent;
                         input.value = nameValue;
                     });
@@ -151,23 +206,24 @@ document.addEventListener(
             //   nameValue = input.value;
             // submit button creer le todo
 
-            const button = document.getElementById('button');
-            button.addEventListener("click", function (event) {
+        });
 
-                event.preventDefault();
+        const button = document.getElementById('button');
+        button.addEventListener("click", function (event) {
 
-                olTD.append(litest);
-                nameValue = input.value;
-                //   console.log(nameValue);
-                litest.textContent = nameValue;
+            event.preventDefault();
 
-            });
+            let nameValue = useValue();
+            let toDoElement = [nameValue, 0];
+            contentToDo.push(toDoElement);
 
+            renderToDoList(contentToDo);
+
+            input.value = "";
         });
 
 
     }, { once: true }
-    // n'ajoute pas un todo mais remplace 
 
 
 
@@ -178,7 +234,7 @@ document.addEventListener(
 
 
 
-// quand on clique sur un li ca ajoute a l input
-//submit plus un todo remettre a 0 la value 
+
+
 // quand ca marche par defaut une ligne rouge et tu cliques ligne verte
 // on peut les trier ensuite par tous et todo , voir enonce 
